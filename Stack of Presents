@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+typedef long long ll;
+#define lp(x,q) for(ll i=x ;i<q;i++)
+#define sor(v) sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define df deque<ll>
+#define minn(v) *min_element(v.begin(),v.end())
+#define maxx(v) *max_element(v.begin(),v.end())
+#define MY_TORNADO ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+ 
+#define rev(v) reverse(v.begin(),v.end())
+#define print(v) for(auto f:v)cout<<f<<" ";
+#define pb(v,a) v.push_back(a)
+#define sz(a) a.size();
+#define all(a) a.begin(),a.end()
+#define test(t)while (t--)
+//Global variable :
+ll cou,ans=0,mx=INT_MIN,mn=INT_MAX,sum=0,modu=1e9+7,flag=0;
+// %d int
+vector<bool>vis(1e2,false);
+vector<vector<int>>adj;
+ 
+int main(){
+MY_TORNADO;
+ 
+int t;
+cin>>t;
+test(t){
+int a,s;
+cin>>a>>s;
+df v(a);
+ans=0;
+set<int>in_memory;
+lp(0,a)cin>>v[i];
+lp(0,s){
+int d;
+cin>>d;
+if(in_memory.count(d)){ans++;
+in_memory.erase(d);}
+else {
+while (v[0]!=d){
+in_memory.insert(v[0]);
+v.pop_front();}
+v.pop_front();
+ans+=in_memory.size()*2+1;
+}
+ 
+}
+cout<<ans<<endl;
+ 
+}
+ 
+return 0;}
