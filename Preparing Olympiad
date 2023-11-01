@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+int a,s,d,f;
+cin>>a>>s>>d>>f;
+int ans=0;
+vector<int>v(a);
+for(int x=0;x<a;x++)cin>>v[x];
+for(int x=0;x<(1<<a);x++){
+    int mn=INT_MAX,mx=INT_MIN,sum=0,cou=0;
+    for(int z=0;z<a;z++){
+        if(x&(1<<z)){
+            sum+=v[z];
+            mn=min(mn,v[z]);
+            mx=max(mx,v[z]);
+            cou++;
+        }
+    }
+    if(cou>1&&mx-mn>=f&&sum>=s&&sum<=d)ans++;
+}
+cout<<ans;
+
+    return 0;
+}
