@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+#define lp(x,q) for(ll i=x ;i<q;i++)
+#define sor(v) sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define df vector<ll>
+#define minn(v) *min_element(v.begin(),v.end())
+#define maxx(v) *max_element(v.begin(),v.end())
+vector<vector<int>>adj;
+vector<bool>vis(1e5,false);
+vector<int>ans;
+#define HAHA_HAHA ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+ll cou=0;
+set<int>s;
+void  dfs(int t){
+cou++;
+s.insert(t);
+vis[t]=true;
+for(int c=0;c<adj[t].size();c++){
+if(!vis[adj[t][c]])dfs(adj[t][c]);
+
+}
+
+}
+int main(){
+int t,y;
+cin>>t>>y;
+adj.resize(t+1),vis.resize(t+1),ans.resize(t+1);
+
+while (y--){
+int r,past;
+cin>>r;
+if(r)cin>>past;
+while (r-1>0){
+cin>>t;
+adj[t].push_back(past),adj[past].push_back(t);
+past=t;
+r--;}
+}
+
+for(int x=0;x<adj.size();x++){
+if(adj[x].empty())
+ans[x]=1;
+for(int z=0;z<adj[x].size();z++){
+if(!vis[adj[x][z]]){dfs(adj[x][z]);
+for(auto f:s)ans[f]=cou;
+
+s.clear();
+cou=0;
+}
+}}
+ans.erase(ans.begin());
+for(auto f:ans)cout<<f<<" ";
+return 0;}
+ 
