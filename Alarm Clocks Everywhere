@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+#define midpoint(a,s) (a+s)/2;
+#define sor(v) sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define rev(v) reverse(v.begin(),v.end())
+#define print(v) for(auto f:v)cout<<f <<" ";
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<endl;int main()
+typedef long long ll;
+int main()
+{
+
+long long a,s,d,gcd=0;
+cin>>a>>s>>d;
+while (--a){
+    ll q;
+    cin>>q;
+    q-=d;
+    gcd=__gcd(q,gcd);
+}
+ll ans=0,c;
+for(ll x=1;x<=s;x++){cin>>c;
+    if(!(gcd%c))ans=x;
+}
+if(ans)cout<<"YES\n"<<d<<" "<<ans;
+else cout<<"NO";
+    return 0;
+}
