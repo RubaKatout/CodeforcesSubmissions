@@ -1,0 +1,64 @@
+
+/*
+💭             💭
+    💭        💭
+     💭     💭
+  💭💭💭☁
+💭🌘💭🌘☁
+💭💭🌸💭☁
+  ☁☁☁☁
+      🎀🎀🎀☁
+      💭💭💭💭☁
+      🍴 💭🍴💭☁ 💭
+      📨  ☁📨☁☁
+
+
+*/#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+#define print(a) for(auto f:a)cout<<f<<" ";
+#define sor(v)n sort(v.begin(),v.end());
+#define rsor(v) sort(v.rbegin(),v.rend());
+#define rev(v) reverse(v.begin(),v.end())
+#define all(v) (v.begin(),v.end())
+#define fi first
+#define se second
+#define pb(x) push_back(x)
+#define pob pop_back()
+#define res(v,a) v.resize(a)
+#define md(q,w)  (q+w)/2;
+#define lp(q,w) for(ll x=q;x<w;x++)
+
+vector<vector<int>>adj;
+vector<bool>vis(1e5,false);
+vector<int>level(1e4);
+//global variable:
+ll cou=0,mx=INT_MIN,mn=INT_MAX,sum=0,av=0,hi=0,lo=0,ans=0,w,flag;
+
+
+int main()
+{int t;
+cin>>t;
+while (t--){
+int a;
+cin>>a;
+set<int>v;
+for(int x=2;x<=sqrt(a);x++){
+  if(a%x==0){v.insert(x);
+  a/=x;
+
+  }
+  if(v.size()==2)break;
+}
+
+if(v.size()==2&&a!=1&&!v.count(a)){
+    cout<<"YES"<<endl;
+    for(auto f:v)cout<<f<<" ";
+    cout<<a;
+}
+else cout<<"NO";
+
+cout<<endl;
+}
+    return 0;
+}
