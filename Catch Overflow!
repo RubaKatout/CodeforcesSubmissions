@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+typedef long long l;
+#define lp(q) for(l x=0;x<q;x++)
+int main(){
+l t,cou=1;
+cin>>t;
+vector<int>to_multiply;
+vector<int>v;
+l overflow=0 ,ans=0,p=pow(2,32);
+ 
+while (t--){if(overflow){
+    string s;
+    cin>>s;
+    if(s=="for")cin>>cou;
+}
+   else { string s;
+    cin>>s;
+    if(s=="for"){
+            cou=1;
+        l a;
+        cin>>a;
+      if(a!=1)to_multiply.push_back(a);
+      v.push_back(a);
+    }
+    else if(s=="add"){
+if(cou==1){
+    for(int x=0;x<to_multiply.size();x++){cou*=to_multiply[x];
+    if(cou>=p)break;}
+ 
+}
+ans+=cou;
+if(ans>=p)overflow++;
+ 
+    }
+    else {
+        cou=1;
+        if(to_multiply.size()&&v.back()==to_multiply.back())to_multiply.pop_back();
+        v.pop_back();
+    }
+ 
+   }
+}
+if(overflow)cout<<"OVERFLOW!!!";
+else
+cout<<ans;
+    return 0;
+}
+ 
