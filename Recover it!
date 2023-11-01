@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+typedef long long ll;
+#define lp(x,q) for(ll i=x ;i<q;i++)
+#define sor(v) sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define df vector<ll>
+#define minn(v) *min_element(v.begin(),v.end())
+#define maxx(v) *max_element(v.begin(),v.end())
+#define MY_TORNADO ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+//Global variable :
+#define rev(v) reverse(v.begin(),v.end())
+#define print(v) for(auto f:v)cout<<f<<" ";
+ll cou,ans=0,mx=INT_MIN,mn=INT_MAX,sum=0,modu=1e9+7;
+ 
+//use scanf,printf,getline
+pair<bool,int> is_prime(int t){
+if(!(t%2)&&t!=2)return {false,t/2};
+for(int x=3;x<=sqrt(t);x+=2){
+if(!(t%x))return {false,t/x};}
+return {true,0};
+}
+int main(){MY_TORNADO;
+vector<int>p={0,2};
+ 
+ map<int,int>nt;
+vector<pair<int,int>>not_prime;
+int t;
+cin>>t;
+map<int,int>prime;
+mx=0;
+lp(0,t*2){
+ll a;
+cin>>a;
+if(is_prime(a).first){prime [a]++;
+mx=max(mx,a);}
+ 
+else {not_prime.push_back({a,is_prime(a).second});
+nt[a]++;}
+}
+for(int x=3;x<=mx;x+=2){
+if(is_prime(x).first)p.push_back(x);
+}
+p.push_back(2750131);
+rsor(not_prime);
+for(int x=0;x<not_prime.size();x++){
+if(nt.count(not_prime[x].second)&&nt[not_prime[x].first]>0){
+cout<<not_prime[x].first<<" ";
+ 
+nt[not_prime[x].second]--;
+ 
+}
+else if(prime.count(not_prime[x].second)&&nt[not_prime[x].first]>0){
+cout<<not_prime[x].first<<" ";
+prime[not_prime[x].second]--;
+}nt[not_prime[x].first]--;
+}
+for(auto f:prime){
+while(prime[f.first]){
+cout<<f.first<<" ";
+prime[f.first]--;
+prime[p[f.first]]--;
+ 
+}
+}
+ 
+ 
+ 
+return 0;}
