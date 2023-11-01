@@ -1,0 +1,36 @@
+  #include <bits/stdc++.h>
+    using namespace std;
+    #define midpoint(a,s) (a+s)/2;
+    #define sor(v) sort(v.begin(),v.end())
+    #define rsor(v) sort(v.rbegin(),v.rend())
+    #define rev(v) reverse(v.begin(),v.end())
+    #define print(v) for(auto f:v)cout<<f<<" ";
+vector<vector<int>>adj(1e5+1);
+vector<bool>vis(1e5+1);
+vector<int>v(1e5+1);
+int mn=1e9;
+void dfs(int t){
+    mn=min(mn,v[t]);
+vis[t]=true;
+for(auto f:adj[t])
+    if(!vis[f])dfs(f);
+
+}
+
+    int main(){
+long long money=0;
+int a,s;
+cin>>a>>s;
+for(int x=1;x<=a;x++)cin>>v[x];
+while (s--){
+    int q,w;
+    cin>>q>>w;
+    adj[q].push_back(w),adj[w].push_back(q);
+}
+for(int x=1;x<=a;x++){
+    if(!vis[x])dfs(x),money+=mn,mn=1e9;
+}
+cout<<money;
+
+
+    return 0;}
