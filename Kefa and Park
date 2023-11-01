@@ -1,0 +1,84 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+ 
+using namespace std;
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<endl;int main()
+#define print(v) for(auto f:v)cout<<f<<" "
+#define midpoint(a,s) (a+s)/2;
+bool is_prime(ll n){
+if(n==2)return true;
+if(n<2)return false;
+for(ll i=3;i*i<=n;++i)if(!(n%i))return false;
+return true;
+}
+vector<ll> divison(ll n){vector<ll>v;
+for(ll i=1;i*i<=n;++i)if(!(n%i))v.push_back(i),v.push_back(n/i);
+return v;
+}
+int fin(int t){cout<<t<<" ";
+if(t==1)return 1;
+if(t%2==0)return fin(t/2);
+return fin(t*3+1);
+ 
+}
+void mergesort(vector<ll>&v,int low,int hi){
+if(low<hi){
+    int md=midpoint(hi,low);
+    mergesort(v,low,md);
+    mergesort(v,md+1,hi);
+}
+ 
+   }
+void printnumberinbinary(unsigned long long t){
+if(!t)return ;
+printnumberinbinary(t>>1);
+cout<<(t&1);
+}
+vector<int>v(1e5+1);
+vector<vector<int>>adj(1e5+1);
+vector<bool>vis(1e5+1),visfortree(vis);
+vector<int>level(1e5+1);
+vector<vector<int>>tree(1e5+1);
+ll ans,cnt,m;
+void dfs(int root){
+cnt=level[root];if(!v[root])cnt=0;
+vis[root]=true;
+if(cnt+v[root]<=m){
+    cnt+=v[root];
+    level[root]=cnt;
+    if(adj[root].empty())ans++;
+    for(auto a:adj[root]){
+        if(!vis[a])level[a]+=level[root],dfs(a);
+    }
+}
+}
+void buildtree(int root){
+    visfortree[root]=true;
+    //tree[root]=adj[root];
+for(auto f:adj[root]){
+    if(!visfortree[f])
+        tree[root].push_back(f),buildtree(f);
+}
+}
+int main()
+{int a;
+cin>>a>>m;
+for(int x=1;x<=a;++x){
+    cin>>v[x];
+}
+while (--a){
+    int q,w;
+    cin>>q>>w;
+    adj[q].push_back(w),adj[w].push_back(q);
+}
+buildtree(1);
+ 
+ 
+adj=tree;
+ 
+dfs(1);
+cout<<ans;
+ 
+    return 0;
+ 
+}
