@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+typedef long long ll;
+#define lp(x,q) for(ll i=x ;i<q;i++)
+#define sor(v) sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define df vector<ll>
+#define minn(v) *min_element(v.begin(),v.end())
+#define maxx(v) *max_element(v.begin(),v.end())
+#define MY_TORNADO ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+//Global variable :
+#define rev(v) reverse(v.begin(),v.end())
+#define print(v) for(auto f:v)cout<<f<<" ";
+ll cou=0,ans=0,mx=INT_MIN,mn=INT_MAX,sum=0,modu=1e9+7;
+vector<pair<int,string>>v;
+//use scanf,printf,getline
+ 
+int main(){
+MY_TORNADO;
+int t;
+cin>>t;
+df v(t);
+lp(0,t)cin>>v[i];
+sor(v);
+cou=0;
+mx=-1;
+deque<int> a;
+ 
+for(int x=0;x<v.size();x++){
+a.push_back(v[x]);
+ 
+while (a.back()-a.front()>5){
+a.pop_front();
+cou--;
+}
+if(a.back()-a.front()<6)cou++;
+mx=max(mx,cou);
+ 
+ 
+}
+cout<<mx;
+return 0;}
+ 
