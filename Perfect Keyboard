@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+vector<set<char>>adj(123),adj2(adj);
+vector<bool>vis(124-1),vis2(vis);
+
+void dfs(char a){
+vis[a]=true;
+cout<<a;
+for(auto f:adj[a]){
+    if(!vis[f])
+        dfs(f);
+}
+
+}
+int main(){
+
+  int t;
+  cin>>t;
+  while (t--){
+        vis=vis2;
+  adj=adj2;  int mx=0,cou=0,sum=0;
+  string s;
+  cin>>s;
+  for(int x=1;x<s.size();x++){
+    adj[s[x]].insert(s[x-1]),adj[s[x-1]].insert(s[x]);
+  }
+char d=s[0];
+int haha=0;
+  for(int x=97;x<adj.size();x++){
+        set<char>f(adj[x]);
+    if(f.size()==1)cou++,d=x;
+    else sum++;
+    haha++;
+  int ff=f.size();
+
+    mx=max(mx,ff);
+  }
+  //printf("sum = %d haha = %d\n",sum,haha);
+  if((mx>2||cou>2||sum==haha)&&s.size()>2)cout<<"NO\n";
+  else {
+    cout<<"YES\n";
+    dfs(d);
+
+for(int x=97;x<vis.size();x++){
+    if(!vis[x])
+        cout<<char(x);
+}
+cout<<"\n";
+  }
+
+  }
+return 0;}
