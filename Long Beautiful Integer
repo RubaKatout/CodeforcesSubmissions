@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+typedef long long ll;
+#define lp(x,q) for(ll i=x ;i<q;i++)
+#define sor(v) sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define df vector<ll>
+ll cou=0,ans=0,mx=INT_MIN,mn=INT_MAX,sum=0;
+ 
+ 
+int main(){
+int q,w;
+string s;
+cin>>q>>w>>s;
+string a=s;
+int d=w;
+for(int x=w;x<q;x++){
+if(a[x-w]>s[x]&&!cou)mx=0;
+if(a[x-w]<s[x]&&!cou&&mx)
+cou++;
+ 
+a[x]=a[x-w];
+}
+if(cou){
+a[w-1]++;
+w--;
+while (w>0&&a[w]=='9'+1){a[w]='0';
+w--;
+a[w]++;
+}
+if(a[0]=='9'+1){a[0]='0';
+a.insert(0,"1");
+}
+}
+w=d;
+ 
+cout<<a.size()<<endl;
+for(int x=0;x<a.size()-w;x++)a[x+w]=a[x];
+cout<<a;
+    return 0;
+}
