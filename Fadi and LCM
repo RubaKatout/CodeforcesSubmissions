@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " << endl;
+#define imod(a , n) (a % n + n ) % n
+
+#define fastio ios_base::sync_with_stdio(false);cin.tie(0);
+#define inF freopen("ladder.in","r",stdin );
+#define outF freopen("ladder.out" , "w" , stdout ) ;
+#define sor(v) sort(v.begin() , v.end());
+#define print(v) for(auto f : v ) cout << f << " " ;
+#define rsor(v) sort(v.rbegin() , v.rend());
+#define rev(v) reverse(v.begin() , v.end());
+#define scan(v) for(auto &it : v)cin >> it ;
+
+#define logar(x , y) log(x) / log(y)
+#define __sum(n) n * (n + 1) / 2
+#define __lcm(a , b) a / __gcd(a , b) * b
+#define pii pair<int , int >
+#define ll  long long
+//#define int ll
+#define matrix vector<vector<ll>>
+#define pii pair<int , int >
+const int N = 1e6 + 5 , M = N * 4;
+const double eps = 1e-18 ;
+
+int32_t main()
+
+{
+
+    fastio;
+
+    ll x ;
+    cin >> x ;
+
+    ll mx = x ;
+    for(ll i = 1 ; i * i <= x ; i ++){
+        if(x % i == 0){
+            ll gcd = __gcd(i , x / i);
+            if(gcd == 1){
+                mx = min(mx , max(i , x / i));
+
+            }
+
+        }
+    }
+
+    cout << x / mx << " " << mx ;
+
+
+}
