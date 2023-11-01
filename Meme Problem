@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+
+/*
+while(NO_SUCCESS){
+    try_again();
+    if(SUCCESS)improve();
+}
+*/
+#define so(v) sort(v.begin(),v.end());
+#define rev(v) reverse(v.begin(),v.end());
+#define print(v) for(auto f:v)cout<<f<<" ";
+#define rso(v) sort(v.rbegin(),v.rend());
+
+int main(){
+int t;
+cin>>t;
+while (t--){
+   int a;
+   cin>>a;
+
+ double s=sqrt(a*(a-4));
+ double ss=a-s;
+ ss/=2;
+s=a+s;
+ s/=2 ;
+ if(a<4&&a)cout<<"N"<<endl;
+ else
+ cout<<"Y "<<setprecision(10)<<s<<" "<<setprecision(10)<<ss<<endl;
+}
+}
+
