@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+typedef long long ll;
+#define lp(x,q) for(ll i=x ;i<q;i++)
+#define sor(v) sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define df vector<ll>
+ll cou=1,ans=0,mx=INT_MIN,mn=INT_MAX,sum=0;
+ 
+ 
+int main(){
+int t;
+cin>>t;
+set<int>s;
+vector<int>z(t);
+for(int x=1;x<=t;x++)s.insert(x);
+deque<pair<int,int>>v;
+for(int x=0;x<t;x++){
+cin>>z[x];
+if(z[x]==0)v.push_back({x+1,0});
+else s.erase(z[x]);
+}int x=0;
+for(auto f:s){
+v[x].second=f;
+x++;
+}
+ 
+for(int x=v.size()-1;x>0;x--){
+if(v[x].first==v[x].second||v[x-1].first==v[x-1].second)swap(v[x].second,v[x-1].second);}
+ 
+for(auto f:z){
+if(f)cout<<f<<" ";
+else {cout<<v[0].second<<" ";
+v.pop_front();
+}
+}
+    return 0;
+}
