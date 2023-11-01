@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+ 
+using namespace std;
+typedef long long l;
+ 
+int main()
+{
+l q,w;
+cin>>q>>w;
+vector<l>v(q);
+for(l x=0;x<q;x++){
+    cin>>v[x];
+}
+sort(v.begin(),v.end());
+v.erase(v.begin(),v.end()-(q/2+1));
+ 
+l mn=v[0],cou=1;
+for(l x=1;x<v.size();x++){
+    l m=0;
+ 
+if (v[x]-mn<w/cou)m=v[x]-mn;
+else m=w/cou;
+ 
+    w-=(m*cou);
+    cou++;
+    mn+=m;
+    if(w/cou==0)break;
+}
+mn+=(w/(v.size()));
+cout<<mn;
+return 0;}
