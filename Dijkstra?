@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+#define ii pair<ll,ll>
+ll sz=1e5+1,oo=1e16;
+vector<vector<ii>>adj(sz);
+vector<ll>mx(sz,oo),from(sz),ans;
+void dijkstra(){
+    priority_queue<ii,vector<ii>,greater<ii>>q;
+    q.push({0,1});
+    while (q.size()){
+        ll cost=q.top().first,node=q.top().second;
+        q.pop();
+        for(auto f:adj[node]){
+            if(cost+f.second<=mx[f.first]){
+                mx[f.first]=cost+f.second;
+                q.push({cost+f.second,f.first});
+                from[f.first]=node;
+            }
+        }
+    }
+}
+
+void dfs(int t){
+   ans.push_back(t);
+   if(t==1)return ;
+   dfs(from[t]);
+
+}
+
+int main(){
+    int  n ,m,a,b,w;
+    cin>>n>>m;
+    while (m--){
+       cin>>a>>b>>w;
+       adj[a].push_back({b,w}),adj[b].push_back({a,w});
+
+    }
+    dijkstra ();
+    if(mx[n]==oo)cout<<-1;
+    else {
+        dfs(n);
+        for(int x=ans.size()-1;x>-1;x--)cout<<ans[x]<<" ";
+    }
+
+
+return 0;}
