@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+ll sz=1e5+1,oo=1e18;
+using namespace std;
+vector<vector<int>>adj(sz);
+vector<int>ans;
+vector<bool>vis(sz);
+void dij(){
+vis[1]=true;
+
+priority_queue<int,vector<int>,greater<int>>q;
+q.push(1);
+while (q.size()){
+    int node=q.top();
+    q.pop();
+    ans.push_back(node);
+    for(auto f:adj[node]){
+        if(!vis[f]){
+            vis[f]=true;
+            q.push(f);
+        }
+    }
+
+}
+}
+int main(){
+    int a,s;
+    cin>>a>>s;
+    while (s--){
+        int q,w;
+        cin>>q>>w;
+        adj[q].push_back(w),adj[w].push_back(q);
+    }
+    dij();
+    for(auto f:ans)cout<<f<<" ";
+
+}
