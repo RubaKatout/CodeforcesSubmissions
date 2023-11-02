@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+double ans;
+void fun(int sumofa,int sum,int sumofq){
+    if(!sumofq){
+        if(sum==sumofa)ans++;
+        return ;
+    }
+    fun(sumofa,sum+1,sumofq-1);
+    fun(sumofa,sum-1,sumofq-1);
+
+
+}
+
+int main(){
+    string a,s;
+    cin>>a>>s;
+    int numberofq=0,sumofa=0,sumofs=0;
+    map<char,int>m{{'+',1},{'-',-1}};
+    for(int x=0;x<a.size();x++)sumofa+=m[a[x]];
+    for(int x=0;x<s.size();x++){
+        if(s[x]=='?')numberofq++;
+        else sumofs+=m[s[x]];}
+
+      sumofa-=sumofs;
+      double d=1<<numberofq;
+    fun(sumofa,0,numberofq);
+
+    cout<<setprecision(10)<<ans/d;
+	return 0;
+}
