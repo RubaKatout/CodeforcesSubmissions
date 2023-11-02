@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+
+using namespace std;
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+#define print(v) for(auto f:v)cout<<f<<" "
+#define fast std::ios::sync_with_stdio(false); cin.tie(0);
+#define sor(v)sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define rev(v) reverse(v.begin(),v.end())
+#define sumimum(t) (t*(t+1))/2;
+#define __lcm(a,s) (a*(s/__gcd(a,s));
+#define print_vector_of_pair(v) for(auto f:v)cout<<f.first<<" "<<f.second<<endl;
+
+bool equivalent(string a,string s,int sz){
+if(a==s)return true;
+if(sz&1)return false;
+
+string a1=a.substr(0,sz/2),a2=a.substr(sz/2),s1=s.substr(0,sz/2),s2=s.substr(sz/2);
+if((a1==s1&&a2==s2)||(a1==s2&&a2==s1))return true;
+return (equivalent(a1,s1,sz/2)&&equivalent(a2,s2,sz/2))||(equivalent(a2,s1,sz/2)&&equivalent(a1,s2,sz/2));
+
+
+   }
+
+int main(){fast;
+string a,s;
+cin>>a>>s;
+  if(equivalent(a,s,s.size()))cout<<"YES";
+  else cout<<"NO";
+
+return 0;}
