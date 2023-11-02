@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+#define ii pair<int,int>
+int main(){
+    int n,ans=0,x=0;
+    cin>>n;
+    deque<ii>v(n);
+    deque<int>sec;
+    for(int x=0;x<n;x++){
+    cin>>v[x].first>>v[x].second;
+    sec.push_back(v[x].second);
+    }
+    sort(v.begin(),v.end());
+    sort(sec.begin(),sec.end());
+
+    while (sec.size()&&x<v.size()){int it=0;
+        if(binary_search(sec.begin(),sec.end(),v[x].second)){
+        it=lower_bound(sec.begin(),sec.end(),v[x].second)-sec.begin();
+        ans+=it;
+
+        int sz=sec.size();
+        sec.erase(sec.begin(),sec.end()-(sz-it-1));
+    }
+
+    x++;
+}
+cout<<ans;
+	return 0;
+}
