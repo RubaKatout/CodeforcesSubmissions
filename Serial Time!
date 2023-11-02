@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+
+using namespace std;
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<endl;
+#define print(v) for(auto f:v)cout<<f<<" "
+#define fast std::ios::sync_with_stdio(false); cin.tie(0);
+#define sor(v))sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define rev(v) reverse(v.begin(),v.end())
+#define sumimum(t) (t*(t+1))/2;
+#define __lcm(a,s) (a*(s/__gcd(a,s));
+#define print_vector_of_pair(v) for(auto f:v)cout<<f.first<<" "<<f.second<<endl;
+char arr[15][15][15];
+bool vis[15][15][15];
+int q,w,e,ans;
+void dfs(int a,int s, int d){
+
+if(!a||!s||!d||vis[a][s][d]||a>q||s>w||d>e||arr[a][s][d]=='#')return ;
+vis[a][s][d]=true;ans++;
+
+dfs(a,s,d+1),dfs(a,s,d-1);
+dfs(a,s+1,d),dfs(a,s-1,d);
+dfs(a+1,s,d),dfs(a-1,s,d);
+}
+int main(){
+    cin>>q>>w>>e;
+    for(int x=1;x<=q;x++)
+     for(int z=1;z<=w;z++)
+        for(int c=1;c<e+1;c++)cin>>arr[x][z][c];
+
+     int a,s;
+     cin>>a>>s;
+     dfs(1,a,s);
+     cout<<ans;
+	return 0;
+}
