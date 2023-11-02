@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " << endl;
+#define imod(a , n) (a % n + n ) % n
+
+#define fastio ios_base::sync_with_stdio(false);cin.tie(0);
+#define inF freopen("file.txt","r",stdin );
+#define outF freopen("perimeter.out" , "w" , stdout ) ;
+#define sor(v) sort(v.begin() , v.end());
+#define print(v) for(auto f : v ) cout << f << " " ;
+#define rsor(v) sort(v.rbegin() , v.rend());
+#define rev(v) reverse(v.begin() , v.end());
+
+#define ll long long
+//#define int ll
+#define pii pair<int , int >
+const int N = 1e5 + 5 , M = N * 4 ;
+const ll MOD = 1e9 + 7 , oo = 1e9 , OO = 1e18 ;
+const double pi = acos(-1) , eps = 1e-6 ;
+#define int ll
+//37
+
+
+int di[] = {1 , -1 , 0 , 0};
+int dj[] = {0 , 0 , 1 , -1};
+/*
+🥺🥺🥺🥺
+🥺🥺🥺🥺
+🥺🥺🥺🥺
+🥺🥺🥺🥺
+*/
+
+int32_t main()
+{   //  inF;
+    // inF;outF;
+    fastio;
+    // Dont Forget memset
+
+    // memset(dp , -1 , sizeof dp);
+    int n , d ;
+    cin >> n >> d ;
+
+    vector<pair<int , int >> v(n);
+    int mx = 0;
+
+    for(auto &it : v)
+        cin >> it.first >> it.second ;
+
+    sort(v.begin() , v.end());
+
+
+    int p1 = 0 , p2 = 0 ;
+    int sum = 0 ;
+    while(p2 < n){
+
+        sum += v[p2].second ;
+      //  debug(sum);
+        while(v[p2].first - v[p1].first  >= d){//debug(v[p1].second);debug(sum);
+                sum -= v[p1].second , p1 ++ ;
+
+        }       // debug(sum);
+        p2 ++ ;
+        mx = max(mx , sum) ;
+    }
+    cout << mx ;
+}
