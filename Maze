@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+
+using namespace std;
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<endl;
+#define print(v) for(auto f:v)cout<<f<<" "
+#define fast std::ios::sync_with_stdio(false); cin.tie(0);
+#define sor(v))sort(v.begin(),v.end())
+#define rsor(v) sort(v.rbegin(),v.rend())
+#define rev(v) reverse(v.begin(),v.end())
+#define sumimum(t) (t*(t+1))/2;
+#define __lcm(a,s) (a*s)/__gcd(a,s);
+#define print_vector_of_pair(v) for(auto f:v)cout<<f.first<<" "<<f.second<<endl;
+
+const int sz=5e2;
+vector<vector<vector<pair<int,int>>>>adj(sz);
+vector<vector<bool>>vis(sz);
+vector<pair<int,int>>ans;
+void dfs(pair<int,int>p){
+    vis[p.first].resize(sz);
+vis[p.first][p.second]=true;
+ans.push_back(p);
+for(auto f:adj[p.first][p.second]){vis[f.first].resize(sz);
+    if(!vis[f.first][f.second])dfs(f);
+}
+}
+int main(){
+    int a,s,d;
+    cin>>a>>s>>d;
+    pair<int,int>p(-1,-1);
+
+    char arr[a][s];
+    for(int x=0;x<a;x++)
+        for(int z=0;z<s;z++){
+            cin>>arr[x][z];
+            if(x)
+                if(arr[x][z]=='.'&&arr[x-1][z]=='.')
+                  p={x,z},  adj[x].resize(sz),adj[x][z].push_back({x-1,z}),adj[x-1].resize(sz),adj[x-1][z].push_back({x,z});
+               if(z)
+                if(arr[x][z]=='.'&&arr[x][z-1]=='.')
+                  p={x,z},  adj[x].resize(sz),adj[x][z].push_back({x,z-1}),adj[x].resize(sz),adj[x][z-1].push_back({x,z});
+        }
+  //print_vector_of_pair(adj[2][3]);
+
+    // return 0;
+if(p.first==-1&&p.second==-1&&!d);
+else {
+    dfs(p);
+rev(ans);
+   for(int x=0;x<d;x++){
+    arr[ans[x].first][ans[x].second]='X';
+   }
+}
+for(int x=0;x<a;x++){
+    for(int z=0;z<s;z++)cout<<arr[x][z];
+    cout<<endl;
+}
+
+	return 0;
+}
