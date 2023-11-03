@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+#define int long long
+
+int32_t main()
+{
+    int t;
+    cin>>t;
+    while (t--){
+        int n,sum=0,gcd=0,a;
+        cin>>n;
+        while (n--){
+            cin>>a;
+            gcd=__gcd(gcd,a);
+            sum+=a;
+        }
+        cout<<gcd<<" "<<sum/gcd<<endl;
+    }
+    return 0;
+}
