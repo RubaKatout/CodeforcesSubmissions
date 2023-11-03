@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+vector<vector<int>>adj(1e5+1);
+vector<int>ans(1e5+1,-1);
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int n,a,b,idx=0;
+    cin>>n;
+    for(int x=1;x<n;x++){
+        cin>>a>>b;
+        adj[a].push_back(x),adj[b].push_back(x);
+    }
+    for(int x=1;x<=n;x++){
+        if(adj[x].size()>2){
+            ans[adj[x][0]]=0;
+            ans[adj[x][1]]=1;
+            ans[adj[x][2]]=2;
+            idx=3;
+            break;
+        }
+    }
+    for(int x=1;x<n;x++){
+        if(ans[x]+1)cout<<ans[x]<<endl;
+        else {
+            cout<<idx<<endl;
+            idx++;
+
+        }
+    }
+
+    return 0;
+}
