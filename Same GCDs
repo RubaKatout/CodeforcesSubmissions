@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main(){
+ 
+   long long t,a,m,cnt,gcd,sq;
+   cin>>t;
+   while (t--){
+        cin>>a>>m;
+ 
+        gcd=__gcd(a,m);
+        a/=gcd,m/=gcd;
+        cnt=m;
+        sq=sqrt(m);
+ 
+        for(long long x=2;x<=sq;x++){
+            if(m%x==0)cnt-=(cnt/x);
+            while (m%x==0)m/=x;
+        }
+        if(m-1)cnt-=(cnt/m);
+        cout<<cnt<<endl;
+ 
+ 
+   }
+ 
+ 
+ 
+   return 0;
+}
