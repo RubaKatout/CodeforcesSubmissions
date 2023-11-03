@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+#define fast ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+const ll oo=1e18;
+vector<int>dsu;
+int get(int u){
+if(dsu[u]==u)return u;
+return dsu[u]=get(dsu[u]);
+}
+vector<map<char,ll>>v;
+
+int main(){
+  int t;
+  for(cin>>t;t;t--){dsu.clear();
+    int n,k;
+    string s;
+    cin>>n>>k>>s;
+    v.clear();
+
+    for(int x=0;x<n;x++)dsu.push_back(x);
+    for(int x=0;x<k;x++){
+        for(int z=x;z<n;z+=k)dsu[z]=get(x),dsu[n-z-1]=get(x);
+    }
+    v.resize(k);
+
+
+    for(int x=0;x<n;x++)dsu[x]=get(x),v[dsu[x]][s[x]]++;
+
+    long long sum=0,cou=0,mx=0;
+    for(int x=0;x<k;x++){cou=0,mx=0;
+        for(auto f:v[x]){
+           cou+=f.second,mx=max(mx,f.second);
+        }
+
+        sum+=cou-mx;
+    }
+
+   cout<<sum<<endl;
+
+  }
+	return 0;
+}
