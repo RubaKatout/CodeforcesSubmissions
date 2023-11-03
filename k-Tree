@@ -1,0 +1,29 @@
+k-Tree#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+/*
+while(NO_SUCCESS){
+    try_again();
+    if(SUCCESS)improve();
+}
+*/
+const ll oo=1e18,sz=2e5+1,mod=1e9+1+1+1+1+1+1+1;
+int n,k,d;
+
+vector<vector<ll>>dp(101,vector<ll>(2,-1));
+long long cal(long long sum,int x){
+    if(sum==n&&x)return 1;
+    if(sum>=n)return 0;
+    if(dp[sum][x]!=-1)return dp[sum][x];
+    long long ans=0;
+    for(int i=1;i<=k;i++){
+        ans=(ans%mod + cal(sum+i,(x||i>=d ? 1: 0))%mod)%mod;
+    }
+
+    return dp[sum][x]=ans;
+}
+int main(){
+   cin>>n>>k>>d;
+    cout<<cal(0,0);
+	return 0;
+}
