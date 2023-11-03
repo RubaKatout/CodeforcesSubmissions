@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+bool try_case(vector<ll>v,vector<ll>v2,ll magic,ll cokkies){
+    int sz=v.size();
+    for(int x=0;x<sz;x++){
+        ll ans=v[x];
+        ans*=cokkies;
+        ans=v2[x]-ans;
+        if(ans<0)magic+=ans;
+        if(magic<0)return false;
+    }
+    return true;
+
+
+}
+int main(){
+    ll n,k,l=0,r=2e9,md,ans;
+    cin>>n>>k;
+    vector<ll>v(n),v2(n);
+    for(int x=0;x<n;x++)
+        cin>>v[x];
+    for(int x=0;x<n;x++)
+        cin>>v2[x];
+    while (l<=r){
+        md=(l+r)/2;
+
+        if(try_case(v,v2,k,md))
+            l=md+1,ans=md;
+        else r=md-1;
+    }
+    cout<<ans;
+
+
+    return 0;
+}
