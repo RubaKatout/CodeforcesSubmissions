@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+using namespace std;
+const long long sz=3e5+1;
+vector<pair<int,int>>tree;
+vector<int>v;
+int n,m;
+void build(int p, int s, int e){
+    if(s==e){
+        tree[p].first=v[s];
+        return ;
+    }
+
+    build(p*2,s,(s+e)/2);
+    build(p*2+1,(s+e)/2+1,e);
+    if(!tree[p*2].second)
+        tree[p].first=tree[p*2].first | tree[p*2+1].first,tree[p].second++;
+    else
+        tree[p].first=tree[p*2].first ^ tree[p*2+1].first;
+
+
+}
+void update(int p , int s, int e, int i, int val){
+    if(s==e){
+        tree[p].first=val;
+        return ;
+    }
+    else{
+   if(i<=(s+e)/2    )
+        update(p*2,s,(s+e)/2,i,val);
+   else
+        update(p*2+1,(s+e)/2+1,e,i,val);
+    if(!tree[p*2].second)
+        tree[p].first= tree[p*2].first | tree[p*2+1].first,tree[p].second++;
+    else
+        tree[p].first= tree[p*2].first ^ tree[p*2+1].first;
+
+    }
+
+}
+
+
+int main(){
+    cin>>n>>m;
+      n=1<<n;
+    v.resize(n),tree.resize(n*4);
+    for(int x=0;x<n;x++)cin>>v[x];
+
+    build(1,0,n-1);
+
+    while (m--){
+
+        int a,b;
+        cin>>a>>b;
+        update(1,0,n-1,a-1,b);
+        cout<<tree[1].first<<endl;
+
+    }
+   return 0;
+}
