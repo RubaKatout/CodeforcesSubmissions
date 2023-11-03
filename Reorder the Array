@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+#define ii pair<ll,ll>
+#define fast ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+ 
+const ll sz=1e5+1,oo=1e16;
+ 
+int main(){fast;
+   int n,cou=0,pointer1=0,pointer2=1;
+   cin>>n;
+   vector<int>v(n);
+   for(int x=0;x<n;x++)cin>>v[x];
+   sort(v.rbegin(),v.rend());
+  
+   while (pointer2<n){
+    while (pointer2<n&&v[pointer1]==v[pointer2])pointer2++;
+    if(pointer2<n)cou++;
+    pointer1++,pointer2++;
+ 
+ 
+   }
+   cout<<cou;
+	return 0;
+}
