@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+#define fast ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+const ll oo=1e18,sz=2e5+1;
+ 
+ 
+vector<vector<int>>adj(sz);
+vector<bool>vis(sz);
+vector<int>from(sz),to(sz);
+vector<int>v;
+void build_tree(int t){
+vis[t]=true;
+for(auto f:adj[t]){
+    if(!vis[f]){
+            to[t]=f;
+    from[f]=t;
+        build_tree(f);
+    }
+ 
+}
+ 
+}
+bool check_bfs(vector<int>v){
+    if(v[0]!=1)return false;
+    queue<int>q;
+    q.push(1);
+    int index=1;
+    while (q.size()){if(to[q.front()]&&index==v.size())return false;
+       while(index<v.size()&&from[v[index]]==q.front()){
+ 
+        q.push(v[index]);
+        index++;
+       }
+ 
+       q.pop();
+    }
+ 
+    if(index!=v.size())return false;
+    else return true;
+ 
+ 
+}
+int main(){
+    int n;
+    cin>>n;
+    for(int x=1;x<n;x++){
+        int z,y;
+        cin>>z>>y;
+       adj[z].push_back(y),adj[y].push_back(z);
+    }
+ 
+    while (n--){
+        int y;
+        cin>>y;
+        v.push_back(y);
+    }
+    build_tree(1);
+ 
+    if(check_bfs(v))cout<<"YES";
+    else cout<<"NO";
+    return 0;
+}
