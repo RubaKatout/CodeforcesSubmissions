@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+
+int main(){
+    ll a,s,d,lo=1,hi=1e18,md,fans=1e18;
+    cin>>a>>s>>d;
+    while (lo<=hi){
+        md=(lo+hi)/2;
+        ll ans=md/s+md/d;
+        if(ans>=a)hi=md-1,fans=min(fans,md);
+        else lo=md+1;
+    }
+    cout<<fans;
+
+	return 0;
+}
