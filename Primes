@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+#define int long long
+bool prime(int t){
+    int sq=sqrt(t);
+    if(t<2)return false;
+    for(int x=3;x<=sq;x+=2){
+        if(t%x==0)return false;
+    }
+    return true;
+}
+int32_t main()
+{
+    int n ;
+    cin >> n;
+    if(n&1){
+        if(!prime(n-2))cout<<-1;
+        else cout<<"2 "<<n-2;
+
+    }
+    else{
+        if(!prime(n-3)){
+           if(!prime(n-5)){
+            if(!prime(n-7))cout<<-1;
+            else cout<<"7 "<<n-7;
+           }
+           else cout<<"5 "<<n-5;
+
+           }
+           else cout<<"3 "<<n-3;
+
+    }
+
+    return 0;
+}
