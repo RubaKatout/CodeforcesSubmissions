@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+vector<int>dsu;
+int get(int u){
+    if(dsu[u]==u)return u;
+    return dsu[u]=get(dsu[u]);
+}
+int main(){
+    int q,n,p;
+    cin>>q;
+    while (q--){
+        cin>>n;
+        dsu.clear();
+        for(int x=0;x<=n;x++)dsu.push_back(x);
+        for(int x=1;x<=n;x++){
+            cin>>p;
+            dsu[get(x)]=get(p);
+
+
+        }
+        map<int,int>com;
+        for(int u=1;u<=n;u++){
+            dsu[u]=get(dsu[u]);
+            com[dsu[u]]++;
+        }
+        for(int x=1;x<=n;x++)cout<<com[dsu[x]]<<" ";
+        cout<<endl;
+
+    }
+	return 0;
+}
