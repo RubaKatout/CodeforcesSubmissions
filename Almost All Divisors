@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+ 
+ 
+ 
+int main(){
+int t;
+cin>>t;
+while (t--){
+    long long n,ans,cnt=0,a,mn=INT_MAX,mx=INT_MIN,sq,flag=0;
+    cin>>n;
+    set<ll>s;
+    for(int x=0;x<n;x++){
+        cin>>a;
+        mn=min(mn,a),mx=max(mx,a);
+        s.insert(a);
+    }
+    ans=mn*mx;
+    sq=sqrt(ans);
+    for(long long x=2;x<=sq&&!flag;x++){
+        if(ans%x==0){
+            if(!s.count(x)||!s.count(ans/x))flag++;
+            if(x*x==ans)cnt++;
+            else cnt+=2;
+ 
+        }
+ 
+ 
+    }
+    if(flag||cnt!=n)cout<<-1;
+    else cout<<ans;
+    cout<<endl;
+ 
+ 
+}
+	return 0;
+}
