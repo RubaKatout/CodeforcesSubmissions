@@ -1,0 +1,84 @@
+#include <bits/stdc++.h>
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+using namespace std;
+const long long sz=1e5+1,oo=1e18;
+int n,m,k,u,v,x,ans,s,y;
+vector<pair<int,int>>adj[sz];
+vector<bool>vis(sz);
+struct edge{
+int node;
+long long cost;
+bool is;
+edge(int a, long long s, bool f){
+    node=a,cost=s,is=f;
+}
+bool operator < (const edge & a) const{
+    if(a.cost==cost)
+        return is>a.is;
+    return cost>a.cost;
+
+
+}
+};
+priority_queue<edge>q;
+vector<long long >mx(sz,1e18);
+
+
+
+
+
+
+
+void dijkstra(){
+
+    q.push(edge(1,0,0));
+    mx[1]=0;
+    while (!q.empty()){
+        edge a=q.top();
+        q.pop();
+        if(vis[a.node]){
+            ans+=a.is;
+            continue;
+            }
+        vis[a.node]=true;
+        for(int x=0;x<adj[a.node].size();x++){
+                pair<int,int>f=adj[a.node][x];
+            if(a.cost+f.second<mx[f.first]){
+                    mx[f.first]=a.cost+f.second;
+                q.push(edge(f.first,a.cost+f.second,0));
+
+
+            }
+        }
+
+    }
+
+
+
+}
+
+/*
+while(NO_SUCCESS){
+    try_again();
+    if(SUCCESS)improve();
+}
+*/
+int main(){
+
+
+
+   ios_base::sync_with_stdio(0); cin.tie(NULL);
+
+    cin>>n>>m>>k;
+    for (int c=0;c<m;c++){
+        cin>>u>>v>>x;
+        adj[u].push_back({v,x}),adj[v].push_back({u,x});
+    }
+    for (int c=0;c<k;c++){
+        cin>>s>>y;
+        q.push(edge(s,y,1));
+    }
+    dijkstra();
+    cout<<ans;
+   return 0;
+}
