@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+
+
+int DP[4001];
+
+int n,a,b,c,mx=0;
+int cal(int sum){
+    if(sum==0)return 0;
+    if(DP[sum]!=-1)return DP[sum];
+
+    int ans=-1e8;
+    if(sum>=a)ans=max(ans,cal(sum-a)+1);
+
+    if(sum>=b)ans=max(ans,cal(sum-b)+1);
+
+    if(sum>=c)ans=max(ans,cal(sum-c)+1);
+
+    return DP[sum]=ans;
+}
+int main(){
+    cin>>n>>a>>b>>c;
+    for(int x=1;x<=n;x++)DP[x]=-1;
+    cal( n);
+
+    cout<<DP[n];
+	return 0;
+}
