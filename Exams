@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int sz = 100005 ;
+int last[sz] , day[sz] , subj[sz] , m , n , ok[sz] ;
+
+bool isok (int number){
+    int days = 0 , fin = 0 ;
+    for(int x = 1 ; x <= number ; x++){
+        ok[x] = 0 ;
+        last[day[x]] = x ;
+    }
+    for(int x = 1 ; x <= number ; x++){
+        if(last[day[x]] != x || ok[day[x]] || !day[x])days++;
+        else if(days >= subj[day[x]])
+            days -= subj[day[x]] , ok[day[x]] = 1  , fin++;
+        else return 0 ;
+
+
+
+    }
+    return m == fin ;
+
+
+
+
+}
+int main(){
+
+    cin >> n >> m ;
+    for(int x = 1 ; x <= n ; x++)
+        cin >> day[x] ;
+    for(int x = 1 ; x <= m ; x++)
+        cin >> subj[x] ;
+    int l = 1 , r = n , md , ans = -1 ;
+    while (l <= r){
+        md = (l + r) / 2 ;
+        if(isok(md))
+            ans = md , r = md - 1 ;
+        else l = md + 1 ;
+    }
+    cout << ans ;
+    return 0;
+}
