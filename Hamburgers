@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    string ss ;
+    long long nb , ns , nc , pb , ps , pc , r , ri = 1e14 , ans , l = 0 , md , number = md ;
+    cin >> ss >> nb >> ns >> nc >> pb >> ps >> pc >> r ;
+    map<char , int> m ;
+    for(auto f : ss)
+        m[f]++;
+    long long  b = m['B'] , s = m['S'] , c = m['C'] , tb , ts , tc , tr;
+
+  while (l <= ri){
+       md = ( l + ri ) / 2 ;
+       number = md ;
+       tb = b * number , tc = number * c , ts = number * s , tr = r ;
+       tb = nb - tb , tc = nc - tc , ts = ns - ts ;
+       if (tb < 0)
+            r -= (pb * abs(tb));
+       if(ts < 0)
+            r -= (ps * abs(ts));
+       if(tc < 0)
+            r -= (pc * abs(tc));
+       if(r >= 0){
+        l = md + 1 ;
+        ans = md ;
+       }
+       else
+        ri = md - 1 ;
+       r = tr ;
+
+
+   }
+   cout << ans ;
+
+
+    return 0;
+}
