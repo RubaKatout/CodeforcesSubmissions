@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+#define imod(a , n) (a % n + n ) % n ;
+#define int long long
+const double eps = 1e-9 , PI = acos(-1) ;
+const int N = 55 , oo = 1e19;
+int n , m , cnt;
+char arr[N][N] ;
+bool valid(int i , int j){
+    return (i > 0 && j > 0 && i <= n && j <= m);
+}
+
+
+int di[] = {-1 , 1 , 0 , 0 };
+int dj[] = {0 , 0  , 1 , -1};
+
+
+void dfs(int r , int c){
+    if(!valid(r , c))return ;
+    if(arr[r][c] == '#')
+        return ;
+    cnt += (arr[r][c] == 'G');
+    arr[r][c] = '#';
+    for(int i = 0 ;i < 4 ;i++){
+        dfs(r + di[i] , c + dj[i]);
+    }
+
+}
+
+
+int32_t main(){
+    int t , G;
+    cin >> t ;
+    while(t--){
+        cin >> n >> m ;
+        G = 0 ;
+        for(int x = 1 ;x <= n ;x++)
+            for(int z = 1 ;z <= m ;z++){
+                cin >> arr[x][z];
+                G += (arr[x][z] == 'G') ;
+            }
+        for(int x = 1 ;x <= n ;x++)
+            for(int z = 1 ;z <= m ;z++){
+                if(arr[x][z] == 'B'){
+                    if(arr[x - 1][z] != 'B')
+                        arr[x - 1][z] = '#';
+                    if(arr[x + 1][z] != 'B')
+                        arr[x + 1][z] = '#';
+                    if(arr[x][z + 1] != 'B')
+                        arr[x][z + 1] = '#';
+                    if(arr[x][z - 1] != 'B')
+                        arr[x][z - 1] = '#';
+                }
+            }
+        cnt = 0 ;
+        dfs(n , m);
+        cout << (cnt == G ? "Yes\n" : "No\n");
+
+
+
+    }
+
+    return 0;
+}
