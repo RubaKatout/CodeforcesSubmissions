@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+#define imod(a , n) (a % n + n ) % n ;
+#define int long long
+const double eps = 1e-9 , PI = acos(-1) ;
+const int N = 1001, oo = 1e9 , M = 2;
+int n , m , k , c , ans;
+int cmp[N][N];
+map<int , int > mp;
+char mat[N][N];
+int vis[N][N];
+int di[] = {0 , 0 , 1 , -1};
+int dj[] = {1 , -1 , 0 , 0};
+void dfs(int i , int j){
+    if(i < 0 || i >= n || j < 0 || j >= m || vis[i][j])return ;
+    if(mat[i][j] == '*'){
+        ans++;
+        return ;
+    }
+    vis[i][j]++;
+
+    cmp[i][j] = c ;
+    for(int k = 0 ; k < 4 ; k++){
+        dfs(i + di[k] , j + dj[k]);
+    }
+
+
+
+}
+int32_t main(){
+    int a , b ;
+    cin >> n >> m >> k ;
+    for(int x = 0 ; x < n ;x ++)
+        for(int z = 0 ; z < m ;z++)
+            cin >> mat[x][z] ;
+    c = 1 ;
+    for(int x = 0 ;x < n ; x++){
+        for(int z = 0 ; z < m ; z++){
+            if(mat[x][z] == '.' && !vis[x][z]){
+                ans = 0 ;
+                dfs(x , z);
+                mp[c] = ans ;
+                c++;
+
+            }
+        }
+    }
+    while (k--){
+        cin >> a >> b ;
+        cout << mp[cmp[a - 1][b - 1]] << endl ;
+    }
+    return 0;
+}
