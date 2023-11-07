@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int n , m , q , t;
+map<string , int>mp;
+vector<int>dsu;
+string s1 , s2 ;
+int getparent(int u){
+    return dsu[u] == u ? u : dsu[u] = getparent(dsu[u]);
+}
+ 
+int main(){
+ 
+    ios_base::sync_with_stdio(0);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cin >> n >> m >>q ;
+    dsu.resize(2 * n);
+    for(int x = 0 ; x < n ; x++){
+        cin >> s1 ;
+        mp[s1] = x;
+        dsu[x] = x , dsu[x + n] = x + n;
+    }
+    while (m--){
+        cin >> t >> s1 >> s2 ;
+        int a = getparent(mp[s1]) , a2 = getparent(mp[s1] + n) ;
+        int b = getparent(mp[s2]) , b2 = getparent(mp[s2] + n) ;
+ 
+        if(t == 1){
+            if(a2 == b || b2 == a)cout << "NO\n";
+            else {
+                cout << "YES\n";
+                dsu[a] = b , dsu[a2] = b2 ;
+            }
+ 
+ 
+        }
+        else {
+            if(a == b || a2 == b2)cout << "NO\n";
+            else {
+                cout << "YES\n";
+                dsu[a] = b2 , dsu[a2] = b ;
+            }
+ 
+        }
+    }
+    while (q--){
+        cin >> s1 >> s2 ;
+        int a = getparent(mp[s1]) , a1 = getparent(mp[s1] + n ) ;
+        int b = getparent(mp[s2]) , b1 = getparent(mp[s2] + n) ;
+        if(a == b || a1 == b1)cout << "1\n" ;
+        else if(a == b1 || b == a1)cout << "2\n";
+        else cout << "3\n";
+    }
+ 
+ 
+    return 0;
+}
