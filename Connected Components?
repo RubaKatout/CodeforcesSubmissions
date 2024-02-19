@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+#define imod(a , n) (a % n + n ) % n
+//#define int long long
+#define fastio ios_base::sync_with_stdio(false);cin.tie(0);
+#define inF freopen("b2.in","r",stdin );
+#define outF freopen("b2.txt , "w" , stdout ) ;
+const double eps = 1e-9 , PI = acos(-1) ;
+const int N = 200005, oo = INT_MAX , M = 2;
+
+
+vector<set<int>> notex(N);
+set<int>unvisited;
+
+int n , m , a , b , cmp;
+
+void bfs(int i){
+
+
+    unvisited.erase(unvisited.find(i));
+
+    queue<int>q;
+    q.push(i);
+    while (q.size()){
+        int f = q.front();
+        q.pop();
+        cmp++;
+        vector<int>del;
+        for(set<int> ::iterator it = unvisited.begin() ; it != unvisited.end() ; it++){
+            if(!notex[f].count(*it)){
+                q.push(*it);
+                del.push_back(*it);
+
+            }
+
+        }
+
+        for(const auto &p : del)
+            unvisited.erase(unvisited.find(p));
+    }
+}
+
+
+int main(){
+
+    cin >> n >> m  ;
+
+    while(m--){
+        cin >> a >> b ;
+        notex[a].insert(b);
+        notex[b].insert(a);
+
+
+    }
+    for(int i = 1 ; i <= n ;i++)
+        unvisited.insert(i) , notex[i].insert(i);
+    vector<int>ans ;
+
+    for(int i = 1 ; i <= n ; i++ ){
+        if(unvisited.count(i)){
+            cmp = 0 ;
+
+            bfs(i);
+            ans.push_back(cmp);
+            //debug(cmp);
+
+        }
+    }
+
+    sort(ans.begin() , ans.end());
+    cout << ans.size() << '\n';
+    for(const auto &p : ans)
+        cout << p << " " ;
+    return 0;
+}
