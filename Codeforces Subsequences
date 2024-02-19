@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define int long long
+
+
+int32_t main()
+{
+    long long k;
+    cin >> k ;
+    int ans = 1 ;
+    string s = "codeforces";
+    vector<int>v(10 , 1);
+   int now = 1 , c = 1;
+   while (now < k){
+    for(int i = 0 ; i < s.size(); i++){
+        now /= c ;
+        now *= (c + 1);
+        v[i]++;
+
+        if(now >= k)break;
+    }
+    c++;
+   }
+   for(int i = 0 ; i < s.size() ;i ++){
+    for(int z = 0 ; z < v[i]; z++)cout << s[i];
+   }
+
+
+    return 0;
+}
