@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+#define imod(a , n) (a % n + n ) % n ;
+
+const double eps = 1e-9 , PI = acos(-1) ;
+const int N = 1001, oo = 1e9 , M = 2;
+//Ruba You can Do IT
+
+
+int32_t main(){
+    int t;
+    cin >> t ;
+    while (t--){
+        int n,  k , ans = 0 , fir = -1 , last = -1;
+        string s ;
+        cin >> n >> k >> s ;
+        deque<int>v;
+        for(int x = 0 ; x < s.size() ;x++){
+            if(s[x] == '1')v.push_back(x);
+        }
+
+        if(v.empty())v.push_back(0) , s[0] = '1' , ans++;
+        else if(v[0] > k)v.push_back(0) , s[0] = '1' , ans++;
+        last = v[0];
+        v.pop_front();
+        int cnt = 0 ;
+
+        for(int x = 0  ; x<s.size();x++){
+            if(s[x] == '0')cnt++;
+            else cnt = 0 , last = x ;
+            if(cnt == k*2 +1)last = last + k + 1 , ans ++ , cnt = k ;
+        }
+        if(cnt > k)ans++;
+        cout << ans << endl ;
+    }
+    return 0;
+}
