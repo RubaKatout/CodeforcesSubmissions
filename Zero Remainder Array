@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+#include <stdio.h>
+#include <math.h>
+using namespace std;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+#define imod(a , n) (a % n + n ) % n
+#define int long long
+#define fastio ios_base::sync_with_stdio(false);cin.tie(0);
+#define inF freopen("file.txt","r",stdin );
+#define outF freopen("bbreeds.out" , "w" , stdout ) ;
+
+
+const double eps = 1e-9 , PI = acos(-1) ;
+const int N = 5005 , oo = INT_MAX , M = 2 , mod = 2004;
+
+int32_t main(){
+    // Dont forget memset
+
+    int t ;
+    cin >> t ;
+    while(t--){
+      map<int , int> mp;
+      int n , k , a;
+      cin >> n >> k ;
+      while(n--){
+        cin >> a;
+        mp[a % k]++;
+
+      }
+      int mx = 0, ans = 0 ;
+      for(auto f : mp){
+        if(mx < f.second &&  f.first){
+            mx = f.second ;
+            ans = f.first ;
+        }
+      }
+      if(!ans){
+        cout << 0 << endl ;
+        continue ;
+      }
+      cout << mx * k - ans + 1 << endl ;
+
+    }
+
+}
+ 
