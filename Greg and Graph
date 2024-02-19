@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+#include <stdio.h>
+#include <math.h>
+using namespace std;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " <<"\n";
+#define imod(a , n) (a % n + n ) % n
+#define int long long
+#define fastio ios_base::sync_with_stdio(false);cin.tie(0);
+#define inF freopen("bbreeds.in","r",stdin );
+#define outF freopen("bbreeds.out" , "w" , stdout ) ;
+const double eps = 1e-9 , PI = acos(-1) ;
+const int N = 501 , oo = INT_MAX , M = 2 , mod = 2012;
+int dis[N][N] , vis[N] , arr[N] , ans[N];
+
+int n ;
+void floyd(int node){
+    for(int i = 1 ; i <= n ; i++){
+        for(int j = 1 ; j <= n ; j++){
+            dis[i][j] = min(dis[i][j] , dis[i][node] + dis[node][j]);
+            if(vis[i] && vis[j])
+                ans[node] += dis[i][j];
+
+        }
+    }
+
+
+}
+int32_t main(){
+    // Dont forget memset
+    cin >> n ;
+    for(int i = 1 ;i <= n ; i++)
+        for(int j = 1 ; j <= n ; j++)
+            cin >> dis[i][j];
+
+
+    for(int i = 1 ; i <= n ; i++)
+        cin >> arr[i];
+
+    for(int i = n ; i > 0 ; --i){
+
+        int node = arr[i];
+        vis[node]++;
+        floyd(node);
+
+
+    }
+    for(int i = 1 ; i <= n ; i++)
+        cout << ans[arr[i]] << " " ;
+      return 0;
+}
