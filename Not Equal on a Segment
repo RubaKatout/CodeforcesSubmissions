@@ -1,0 +1,83 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+ 
+// b
+const double eps = 1e6;
+ 
+vector<int> v ;
+vector<pair<int , int>> maxseg , minseg ;
+void maxbuild(int p , int s , int e){
+    if(s == e){
+        maxseg[p].first = v[s] ;
+        maxseg[p].second = s ;
+        return ;
+ 
+    }
+    maxbuild(p * 2 , s , (s + e) / 2);
+    maxbuild(p * 2 + 1 , (s + e) / 2 + 1 , e) ;
+ 
+    maxseg[p] = max(maxseg[p * 2] , maxseg[p * 2 + 1]);
+}
+void minbuild(int p , int s , int e){
+    if(s == e){
+        minseg[p].first = v[s];
+        minseg[p].second = s ;
+        return ;
+    }
+    minbuild(p * 2 , s , (s + e) / 2);
+    minbuild(p * 2 + 1 ,(s + e) / 2 + 1 , e);
+ 
+    minseg[p] = min(minseg[p * 2] , minseg[p * 2 + 1]);
+ 
+ 
+}
+pair<int , int >getmax(int p , int s , int e ,int a , int b){
+    if(a <= s && b >= e)
+        return maxseg[p];
+    if(a > e || b < s)
+        return make_pair(INT_MIN , 0) ;
+ 
+    return max(getmax(p * 2 , s , (s + e) / 2 , a , b ) , getmax(p * 2 + 1 , (s + e) / 2 + 1 , e , a , b));
+ 
+ 
+}
+pair<int , int> getmin(int p , int s , int e , int a , int b){
+    if(a <= s && b >= e)
+        return minseg[p];
+    if(a > e || b < s)
+        return make_pair(INT_MAX , 0) ;
+ 
+    return min(getmin(p * 2 , s , (s + e) / 2 , a ,b) , getmin(p * 2 + 1 , (s + e) / 2 + 1 , e , a , b));
+ 
+ 
+}
+ 
+int32_t main(){
+ 
+ 
+    ios_base::sync_with_stdio(0);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int n , m , a , b , x ;
+    cin >> n >> m ;
+    v.resize(n) , maxseg.resize(4 * n + 4) , minseg.resize(4 * n + 4);
+    for(auto &it : v)
+        cin >> it ;
+    maxbuild(1 , 0 , n - 1);
+    minbuild(1 , 0 , n - 1);
+    while (m--){
+        cin >> a >> b >> x ;
+        a-- , b-- ;
+        pair<int , int >p1 = getmax(1 , 0 , n - 1 , a  , b);
+        pair<int , int> p2 = getmin(1 , 0 , n - 1 , a , b);
+        //cout << p1.first << " " << p2.first << endl;
+ 
+        if(p1.first != x)cout << p1.second + 1 << '\n';
+        else if(p2.first != x)cout << p2.second + 1 << '\n';
+        else cout <<"-1\n";
+ 
+    }
+ 
+        return 0;
+}
