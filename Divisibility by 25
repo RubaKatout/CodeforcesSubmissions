@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " << endl;
+
+int calc(string s , string st){
+
+   // if(st != "25")return 1e3 ;
+
+    int f = s.rfind(st[1]);
+    if(f < 0 || f > s.size())return 1e3 ;
+    int ret = s.size();
+    ret = ret - 1 - f ;
+    s.erase(f , 1);
+
+
+
+
+    f = s.rfind(st[0]);
+    if(f < 0 || f > s.size())return 1e3 ;
+    ret +=s.size();
+    ret = ret - 1 - f ;
+    s.erase(f , 1);
+
+    if(s.empty())return ret ;
+
+
+    for(int i = 0 ; i < s.size() ; i ++){
+        if(s[i] != '0')return ret ;
+        else ret ++ ;
+    }
+
+    return 1e3 ;
+
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);cin.tie(0);
+    string s ;
+    cin >> s;
+    if(s.size() == 1)cout << -1;
+    else {
+
+        int mn = min({calc(s , "00"), calc(s , "25") , calc(s , "50") , calc(s , "75")});
+
+        if(mn == 1e3)cout << -1 ;
+        else cout << mn ;
+
+
+    }
+    return 0;
+}
