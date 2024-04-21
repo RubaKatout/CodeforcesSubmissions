@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " << endl;
+const int N = 2e5 + 5 ;
+int ans[N];
+
+int main()
+{
+    ios_base::sync_with_stdio(false);cin.tie(0);
+
+    int n,  k ;
+    cin >> n >> k ;
+    int r[n];
+    deque<pair<int , int > > v ;
+
+    for(int i = 0 ; i < n ; i ++){
+        cin >> r[i];
+        v.push_back({r[i] , i});
+    }
+
+    sort(v.rbegin() , v.rend());
+
+    while(k--){
+        int a , b ;
+        cin >> a >> b ;
+
+        a -- , b -- ;
+        if(r[a] < r[b])ans[b] -- ;
+        if(r[a] > r[b])ans[a] -- ;
+    }
+
+    while(v.size()){
+        int fr = v.front().first;
+      //  debug(fr)
+        queue<int> tmp ;
+        while(fr == v[0].first){
+            tmp.push(v[0].second);
+            v.pop_front();
+
+        }
+        while(tmp.size()){
+            ans[tmp.front()] += v.size();
+            tmp.pop();
+        }
+    }
+
+    for(int i = 0 ; i < n ; i ++)cout << ans[i] << " " ;
+
+    return 0;
+}
