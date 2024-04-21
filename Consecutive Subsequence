@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " << endl;
+const int N = 2e5 + 5 ;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);cin.tie(0);
+    int n ;
+    cin >> n ;
+    map<int , int > mp ;
+
+    int i = 0 , mx = 0 , ans;
+    vector<int> v ;
+    while(n--){
+        int a ;
+        cin >> a ;
+        v.push_back(a);
+
+        if(mp.count(a - 1)){
+
+            mp[a] = mp[a - 1] + 1 ;
+
+        }
+        else{
+            mp[a] = 1 ;
+
+
+        }
+        if(mx < mp[a])mx = mp[a] , ans = a;
+        i ++ ;
+    }
+
+    cout << mx << endl;;
+
+
+    ans -= mx - 1;
+    //debug(ans)
+    for(int i = 0 ; i < v.size() ; i ++){
+
+        if(v[i] == ans){
+            cout << i + 1 << " " ;
+            ans ++ ;
+        }
+    }
+
+    return 0;
+}
