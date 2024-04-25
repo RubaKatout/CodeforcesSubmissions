@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define debug(x) cout << '[' << #x << " is: " << x << "] " << endl;
+const int N = 2e5 + 5 ;
+vector<int> adj[N];
+int dis[N] ;
+map<pair<int , int > , int > mp ;
+string ans ;
+vector<string> answers ;
+vector<pair<int , vector<int> > > v ;
+vector<int> all[N];
+int k , n ;
+int curr[N];
+void calc(int i){
+
+    if(i > n){
+        if(answers.size() < k)answers.push_back(ans);
+        return ;
+
+    }
+
+    for(int j = 0 ; j < all[i].size() && answers.size() < k ; j ++){
+
+        ans[mp[{i , curr[i]}]] = '0';
+        ans[mp[{i , all[i][j]}]] = '1';
+        curr[i] = all[i][j];
+        calc(i + 1);
+
+    }
+
+
+
+
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);cin.tie(0);
+
+    int m  ;
+    cin >> n >> m >> k ;
+
+    memset(dis , -1 , sizeof dis);
+
+    for(int i = 0 ; i < m ; i ++){
+        int a , b ;
+        cin >> a >> b ;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+
+        mp[{a , b}] = mp[{b , a}] = i ;
+
+    }
+
+
+    dis[1] = 0 ;
+    queue<int> q ;
+    q.push(1);
+
+    ans = string(m , '0');
+
+    while(q.size()){
+        auto fr = q.front();
+        q.pop();
+
+
+        for(auto f : adj[fr]){
+            if(dis[f] == -1){
+                    //debug(f)
+                dis[f] = dis[fr] + 1 ;
+                ans[mp[{f , fr}]] = '1';
+                curr[f] = fr ;
+                q.push(f);
+
+            }
+            else if(dis[f] + 1 == dis[fr])all[fr].push_back(f);
+
+        }
+
+    }
+
+
+
+
+    calc(2);
+
+
+
+
+    cout << answers.size() << '\n';
+    for(auto f : answers)cout << f << '\n';
+}
